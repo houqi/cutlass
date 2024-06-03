@@ -109,7 +109,7 @@ CUTLASS_TEST_L1(SM80_Device_Gemm_f16n_f16t_f32t_tensor_op_f32, 128x128x64_64x64x
   using ElementOutput = float;
   using ElementAccumulator = float;
 
-  using Gemm = cutlass::gemm::device::GemmUniversal<
+  using Gemm = cutlass::gemm::device::Gemm<
       cutlass::half_t, cutlass::layout::ColumnMajor,
       cutlass::half_t, cutlass::layout::RowMajor,
       ElementOutput, cutlass::layout::RowMajor,
@@ -121,14 +121,14 @@ CUTLASS_TEST_L1(SM80_Device_Gemm_f16n_f16t_f32t_tensor_op_f32, 128x128x64_64x64x
           ElementAccumulator, ElementAccumulator>,
       cutlass::gemm::threadblock::ThreadblockSwizzleStreamK, 3>;
 
-  EXPECT_TRUE(test::gemm::device::TestAllGemmUniversal<Gemm>());
+  EXPECT_TRUE(test::gemm::device::TestAllGemm<Gemm>());
 } )
 
 CUTLASS_TEST_L1(SM80_Device_Gemm_f16n_f16t_f32n_tensor_op_f32, 128x128x64_64x64x64_sk, {
   using ElementOutput = float;
   using ElementAccumulator = float;
 
-  using Gemm = cutlass::gemm::device::GemmUniversal<
+  using Gemm = cutlass::gemm::device::Gemm<
       cutlass::half_t, cutlass::layout::ColumnMajor,
       cutlass::half_t, cutlass::layout::RowMajor,
       ElementOutput, cutlass::layout::ColumnMajor,
@@ -140,7 +140,7 @@ CUTLASS_TEST_L1(SM80_Device_Gemm_f16n_f16t_f32n_tensor_op_f32, 128x128x64_64x64x
           ElementAccumulator, ElementAccumulator>,
       cutlass::gemm::threadblock::ThreadblockSwizzleStreamK, 3>;
 
-  EXPECT_TRUE(test::gemm::device::TestAllGemmUniversal<Gemm>());
+  EXPECT_TRUE(test::gemm::device::TestAllGemm<Gemm>());
 } )
 
 CUTLASS_TEST_L1(SM80_Device_Gemm_f16n_f16t_f32t_tensor_op_f32, 256x64x64_64x64x64, {
